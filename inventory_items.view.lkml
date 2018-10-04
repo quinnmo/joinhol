@@ -12,6 +12,26 @@ view: inventory_items {
     sql: ${TABLE}.cost ;;
   }
 
+  dimension: sku {
+    type: string
+    sql: ${TABLE}.product_sku ;;
+    }
+
+  dimension_group: sold {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.sold_at ;;
+  }
+
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -48,7 +68,6 @@ view: inventory_items {
 
   dimension: product_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.product_id ;;
   }
 
@@ -60,25 +79,6 @@ view: inventory_items {
   dimension: product_retail_price {
     type: number
     sql: ${TABLE}.product_retail_price ;;
-  }
-
-  dimension: product_sku {
-    type: string
-    sql: ${TABLE}.product_sku ;;
-  }
-
-  dimension_group: sold {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.sold_at ;;
   }
 
   measure: count {

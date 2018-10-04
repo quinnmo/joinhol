@@ -22,7 +22,18 @@ explore: events {
   }
 }
 
-explore: inventory_items {
+explore: orders {
+  join: users {
+    type: left_outer
+    sql_on: ${orders.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+}
+
+explore: inventory_items {}
+
+explore: inventory {
+  view_name: inventory_items
   join: products {
     type: left_outer
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
@@ -34,6 +45,10 @@ explore: inventory_items {
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
     relationship: many_to_one
   }
+}
+
+explore: shipping_info {
+  view_name: order_items
 }
 
 explore: order_items {
@@ -68,13 +83,6 @@ explore: order_items {
   }
 }
 
-explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: products {
   join: distribution_centers {

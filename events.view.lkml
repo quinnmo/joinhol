@@ -89,7 +89,6 @@ view: events {
 
   dimension: user_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 

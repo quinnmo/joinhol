@@ -35,15 +35,18 @@ view: order_items {
     sql: ${TABLE}.delivered_at ;;
   }
 
+  dimension: is_delivered {
+    type: yesno
+    sql: ${delivered_date} is not null ;;
+  }
+
   dimension: inventory_item_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.inventory_item_id ;;
   }
 
   dimension: order_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.order_id ;;
   }
 
@@ -59,6 +62,11 @@ view: order_items {
       year
     ]
     sql: ${TABLE}.returned_at ;;
+  }
+
+  dimension: is_returned {
+    type: yesno
+    sql: ${returned_date} is not null ;;
   }
 
   dimension: sale_price {
@@ -87,7 +95,6 @@ view: order_items {
 
   dimension: user_id {
     type: number
-    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 
